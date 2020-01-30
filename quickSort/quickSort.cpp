@@ -34,7 +34,7 @@ void quickSort(int array[],int lb,int ub){
 
 
 int partition(int array[],int lb,int ub){
-    int pivot=array[lb],
+    int pivot=array[lb],  //int pivot=array[(lb+ub)/2],
     start=lb,
     end=ub;
 
@@ -50,6 +50,7 @@ int partition(int array[],int lb,int ub){
         }
     }
     swap(&array[lb],&array[end]);
+    //swap(&array[(lb+ub)/2],&array[end]);      //partition in middle,impoved best case
     return end;
 }
 
