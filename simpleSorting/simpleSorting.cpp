@@ -8,8 +8,8 @@ void swap(int*,int*);
 
 //main()
 int main(){
-    int numbers[]={7,5,3,2,1};     //worst case
-    int numbers2[]={1,2,3,5,7};    //best case
+    int numbers1[]={7,5,3,2,1};     //worst case
+    int numbers[]={1,2,3,5,7};    //best case
 
     int size=sizeof(numbers)/sizeof(numbers[0]);
     display(numbers,size);
