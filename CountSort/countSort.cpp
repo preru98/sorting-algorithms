@@ -49,7 +49,7 @@ void display(int array[],int size){
 
 
 int findMax(int array[], int size){
-    int max=INT32_MIN;
+    int max=INT32_MIN;        //Macro for smallest int value
     for(int x=0;x<size;x++){
         if(max<array[x]){
             max=array[x];
