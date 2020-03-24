@@ -36,7 +36,7 @@ void maxHeapify(int array[],int index,int size){
     else{
         largest=index;
     }
-    if(rchild<=size && array[rchild]>array[index]){
+    if(rchild<=size && array[rchild]>array[largest]){
         largest=rchild;
     }
     if(largest!=index){
