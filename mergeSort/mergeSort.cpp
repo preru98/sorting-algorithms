@@ -9,7 +9,7 @@ void merge(int[],int,int,int);
 
 //main()
 int main(){
-    int numbers[]={7,5,3,2,1};     //worst case
+    int numbers[]={3,4,1,2,9,8,0,10,6,18,2,3,10,100,3};     //worst cwase
     int numbers2[]={1,2,3,5,7};    //best case
 
     int size=sizeof(numbers)/sizeof(numbers[0]);
@@ -38,9 +38,7 @@ void mergeSort(int array[],int lb,int ub){
 void merge(int array[],int lb,int mid,int ub){
     int size=ub-lb+1;
     int *newArray=new int [size];
-    int i=lb,
-    j=mid+1,
-    k=lb;
+    int i=lb, j=mid+1, k=0;
 
     while(i<=mid && j<=ub){
         
@@ -68,8 +66,8 @@ void merge(int array[],int lb,int mid,int ub){
             k++;
         }
     }
-    for(int i=lb;i<=ub;i++){            //Transferring contents after merging to original array
-        array[i]=newArray[i];
+    for(int i=lb, j=0;i<=ub;i++,j++){            //Transferring contents after merging to original array
+        array[i]=newArray[j];
     }
 }
 
