@@ -1,8 +1,8 @@
 /*
 Problem :
     Perform countsort
-    No duplicates  
-    No negative numbers
+    Duplicates allowed
+    Negative numbers allowed
     0 allowed
 Solution : 
     Create hashtable of array.
@@ -10,6 +10,7 @@ Solution :
 */
 
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 int find_max_element(int[],int); 
@@ -17,7 +18,7 @@ void count_sort(int[],int);
 void display(int[],int);
 
 int main(){
-    int array[]={-3,0,0,1,3,-2,2,-2,3};
+    int array[]={-3,0,0,1,3,-2,2,-2,3,9,-9,0,0,0};
     int size=sizeof(array)/sizeof(array[0]);
     cout<<"\nBefore Sorting :\n";
     display(array,size);
@@ -48,24 +49,21 @@ int find_min_element(int array[],int size){
 
 void count_sort(int array[],int size){
 
-    int max=find_max_element(array,size);
-    int min=find_min_element(array,size);
-    int size_hashtable=max-min+1;
-    int *hashtable=new int[size_hashtable];
+    // int max=find_max_element(array,size);
+    // int min=find_min_element(array,size);
+    int min_array=*min_element(array, array+size);
+    int max_array=*max_element(array, array+size);
+    int size_hash=max_array-min_array+1;
+    int* hash = new int[size_hash];
 
-    for(int i=0;i<size_hashtable;i++){
-        hashtable[i]=-1;
+    for (int i = 0; i < size; i++){
+        hash[array[i]-min_array]++;
     }
-    for(int i=0;i<size;i++){
-        hashtable[array[i]-min]++;
-    }
-    for(int i=0,j=0;i<size_hashtable;i++){
-        if(hashtable[i]!=-1){
-            while(hashtable[i]!=-1){
-                array[j]=i+min;
-                j++;
-                hashtable[i]--;
-            }
+    for(int i=0, j=0;i<size_hash;i++){
+        while(hash[i]){
+            array[j]=i+min_array;
+            j++;
+            hash[i]--;
         }
     }
 }
