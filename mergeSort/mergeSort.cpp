@@ -1,80 +1,64 @@
 #include<iostream>
 using namespace std;
 
-// prototypes
-void display(int [],int);
-void mergeSort(int[],int,int);
-void swap(int*,int*);
-void merge(int[],int,int,int);
+void merge_sort(int, int, int[]);
+void display(int, int[]);
+void merge(int, int, int, int[]);
 
-//main()
 int main(){
-    int numbers[]={3,4,1,2,9,8,0,10,6,18,2,3,10,100,3};     //worst cwase
-    int numbers2[]={1,2,3,5,7};    //best case
-
-    int size=sizeof(numbers)/sizeof(numbers[0]);
-    display(numbers,size);
-    mergeSort(numbers,0,size-1);
+    int array[]={9,3,7,3,8,3,4,5,6,7,8,9};
+    int size=sizeof(array)/sizeof(array[0]);
+    cout<<"Before sorting \n";
+    display(size, array);
+    merge_sort(0, size-1, array);
     cout<<"After sorting \n";
-    display(numbers,size);
-
+    display(size, array);
     return 0;
 }
 
-//functions
-void mergeSort(int array[],int lb,int ub){
-
+void merge_sort(int lb, int ub, int array[]){
     if(lb<ub){
-        int mid=(lb+ub)/2;
+        int mid = (lb+ub)/2;
 
-        mergeSort(array,lb,mid);
-        mergeSort(array,mid+1,ub);
+        merge_sort(lb, mid, array);
+        merge_sort(mid+1, ub, array);
 
-        merge(array,lb,mid,ub);
+        merge(lb, mid, ub, array);
     }
 }
 
+void display(int size, int array[]){
+    for (int i = 0; i < size; i++){
+        cout<<array[i]<<" | ";
+    }
+    cout<<"\n";
+}
 
-void merge(int array[],int lb,int mid,int ub){
-    int size=ub-lb+1;
-    int *newArray=new int [size];
-    int i=lb, j=mid+1, k=0;
+void merge(int lb, int mid, int ub, int array[]){
+    int size_new=ub-lb+1;
+    int i,j,k;
+    int* new_array= new int[size_new];
 
-    while(i<=mid && j<=ub){
-        
-        if(array[i]<=array[j]){
-            newArray[k]=array[i];
-            i++;
+    for(i=lb, j=mid+1, k=0; i<=mid && j<=ub;){
+        if(array[i] < array[j]){
+            new_array[k++]=array[i++];
         }
         else{
-            newArray[k]=array[j];
-            j++;
-        }
-        k++;
-    }
-    if(i>mid){
-        while(j<=ub){
-            newArray[k]=array[j];
-            j++;
-            k++;
+            new_array[k++]=array[j++];
         }
     }
-    if(j>ub){
-        while(i<=mid){
-            newArray[k]=array[i];
-            i++;
-            k++;
-        }
+
+    while(i<=mid){
+        new_array[k++]=array[i++];
     }
-    for(int i=lb, j=0;i<=ub;i++,j++){            //Transferring contents after merging to original array
-        array[i]=newArray[j];
+    while(j<=ub){
+        new_array[k++]=array[j++];
     }
+
+    for(int p = lb, q=0; p<=ub;){             //Transferring contents to original array
+        array[p++]=new_array[q++];
+    }
+    
 }
 
-
-void display(int array[],int size){
-    for(int i=0;i<size;i++){    
-        cout<<array[i]<<" | ";  
-    }
-}
 
